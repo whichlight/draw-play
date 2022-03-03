@@ -58,7 +58,7 @@ class Path{
         this.points.forEach((p,i)=>{
             if(i<(this.points.length-1)){
                 strokeWeight(this.r);
-                stroke(0,0,10,0.1); 
+                stroke(0,0,20,0.1); 
                 line(p[0], p[1], this.points[i+1][0], this.points[i+1][1]);
             }
         })
