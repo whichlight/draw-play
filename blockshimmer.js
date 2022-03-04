@@ -3,6 +3,7 @@ let w,h;
 let pathStarted = false; 
 let g_path; 
 let paths = []; 
+let bc = 240; 
 
 function setup() {
     w = windowWidth; 
@@ -11,11 +12,10 @@ function setup() {
     colorMode(HSB, 360, 100, 100); 
     background(0,0,0);
     rectMode(CENTER);
-
 }
 
 function draw() {
-    background(0,0,0,0.1);
+    background(bc,100,100,0.1);
     if(mouseIsPressed){
         if(!pathStarted){
             g_path = new Path(); 
@@ -63,6 +63,7 @@ class Path{
                 let r = d.mag();
                 if(this.max<r) this.max = r; 
                 r = r*sin(frameCount*0.05+i*0.5); 
+                fill(bc-60,100,100);
                 rect(p.x, p.y, r, r);
             }
         })
