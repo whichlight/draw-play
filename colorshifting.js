@@ -84,7 +84,6 @@ function collideColor(p, dist) {
             if (d!=0 && d < dist && !(g_changeNode[0]==path_i && abs(g_changeNode[1]-point_i)<2)) {
                 g_path.c = newColor();
                 g_changeNode = [path_i, point_i];
-                console.log(g_changeNode);
             }
         });
     });
