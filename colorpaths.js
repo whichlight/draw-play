@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    //background(0, 0, 0, 0.05);
+    //background(0, 0, 0);
     if (mouseIsPressed) {
         if (!pathStarted) {
             g_path = new Path();
@@ -37,7 +37,7 @@ function draw() {
 
 
     paths.forEach((p) => {
-        p.highlight();
+      //  p.highlight();
         p.collides();
         p.update();
     });
@@ -71,23 +71,47 @@ class Path {
     }
 
     drawPath() {
+        /*
+        //had to remove this to allow for layers to interweave
+        //and draw on top of each other
+        //rather than having each layer with a fixed z index 
         this.points.forEach((p, i) => {
             if (i < (this.points.length - 1)) {
                 strokeWeight(this.r);
-                stroke(p.c, this.glow, 100);
+                stroke(p.c, this.glow, 100,0.8);
                 line(p.x, p.y, this.points[i + 1].x, this.points[i + 1].y);
-
                 if (i == this.index) {
                     p.c = this.c;
                 }
             }
         })
+        */
+
+        if(this.index< this.points.length-1){
+            let p = this.points[this.index];
+            let q = this.points[this.index+1];
+            p.c = this.c;
+            strokeWeight(this.r);
+            stroke(p.c, this.glow, 100,1);
+            line(p.x, p.y, q.x, q.y);
+
+
+            noFill();
+            strokeWeight(2);
+            stroke(p.c, 90, 50);
+            ellipse(p.x, p.y, this.r, this.r);
+
+
+            
+        }
+       
     }
 
     highlight() {
         let p = this.points[this.index];
-        noStroke();
-        fill(p.c, 0, 100);
+        noFill();
+        strokeWeight(2);
+        stroke(p.c, 90, 50);
         ellipse(p.x, p.y, this.r, this.r);
     }
 
