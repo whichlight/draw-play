@@ -38,8 +38,15 @@ function touchEnded(){
 
 function mouseDragged(){
     let p = new Point(createVector(mouseX, mouseY));
+    let spacer = true;
 
-    if(p.x>=0 && p.x <= w && p.y >= 0 && p.y <= h){
+    if(points.length>1){
+        let q = points[points.length-1];
+        d = p5.Vector.dist(q.pos, p.pos)
+        spacer = (d>rad/6) ? true : false; 
+    }
+
+    if(p.x>=0 && p.x <= w && p.y >= 0 && p.y <= h && spacer){
         points.push(p);
     }
 
