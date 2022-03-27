@@ -6,7 +6,7 @@ let g_start, g_end = 0;
 let toActivate = []; 
 
 let bins = []; 
-const rad = 30; 
+const rad = 20; 
 const binSize = rad*2; 
 
 
