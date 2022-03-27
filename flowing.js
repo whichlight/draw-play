@@ -60,7 +60,6 @@ function draw() {
         p.activate(p.newstate);
     });
 
-    drawBins();
 
 }
 
