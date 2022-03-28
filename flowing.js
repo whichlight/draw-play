@@ -206,9 +206,3 @@ function getBinPoints(x,y){
     return binPoints; 
 }
 
-/*
-//add binning
-// rewrite point search function 
-// create bins 
-//add bins in fxn 
-*/
