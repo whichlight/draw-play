@@ -16,16 +16,20 @@ function setup() {
 
 
 function mouseDragged(){
-    let p = new Point(createVector(mouseX, mouseY));
-
-    if(p.x>=0 && p.x <= w && p.y >= 0 && p.y <= h){
-        points.push(p);
-    }
-
+ 
 }
 
 function draw() {
     background(0,0,0);
+
+    if(mouseIsPressed){
+        let p = new Point(createVector(mouseX, mouseY));
+
+        if(p.x>=0 && p.x <= w && p.y >= 0 && p.y <= h){
+            points.push(p);
+        }
+    
+    }
 
     points.forEach((p)=>{
         p.draw(); 
