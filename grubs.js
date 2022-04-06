@@ -16,40 +16,39 @@ function setup() {
     h = windowHeight;
     createCanvas(w, h);
     colorMode(HSB, 360, 100, 100);
-    background(0, 0, 0);
+}
+
+
+function mouseDragged(){
+    if (!pathStarted) {
+        g_path = new Path();
+        pathStarted = true;
+        paths.push(g_path);
+    }
+    if (pathStarted) {
+        g_path.addPoint(mouseX, mouseY);
+    }
+}
+
+function touchEnded(){
+    if(pathStarted){
+        g_path.completed = true; 
+    }
+    pathStarted = false;
 
 }
 
 function draw() {
-    background(0, 0, 0);
+    background(20, 100, 100);
 
-    if (mouseIsPressed) {
-        if (!pathStarted) {
-            g_path = new Path();
-            pathStarted = true;
-            paths.push(g_path);
-        }
-        if (pathStarted) {
-            g_path.addPoint(mouseX, mouseY);
-        }
-    }
-
-    if (!mouseIsPressed) {
-        if(pathStarted){
-            g_path.completed = true; 
-        }
-        pathStarted = false;
-    }
 
     paths.forEach((p) => {
         p.drawPath();
     });
 
-
     paths.forEach((p) => {
         if(p.completed){
             p.update();
-
         }
     });
 }
@@ -74,40 +73,42 @@ class Path {
 
     addPoint(x, y) {
         let p = new Point(createVector(x, y), this.c);
+        this.c+=1;
+        this.c%=360; 
         this.points.push(p);
     }
 
     drawPath() {
-      
-
         this.points.forEach((p,i) => {
             if(i<this.points.length-1){
                 let p = this.points[i];
                 let q = this.points[i+1];
-                p.c = this.c;
 
                 let r = max(10,3*p5.Vector.dist(p.pos, q.pos)); 
                 noFill();
-                stroke(0, 0, 100);
+                stroke(60, 100, 100);
                // strokeWeight(r);
-               // line(p.x, p.y, q.x, q.y);
+                line(p.x, p.y, q.x, q.y);
+             //  fill(p.c,100,100,0.5);
                ellipse(p.x, p.y, r, r);
-
             }
         });
 
         if(this.index< this.points.length-1){
             let p = this.points[this.index];
             let q = this.points[this.index+1];
-            p.c = this.c;
+
+
             let r = max(10,3*p5.Vector.dist(p.pos, q.pos)); 
 
 
             strokeWeight(1);
-            fill(0,0,100);
+            fill(60,100,100);
            // noFill();
            // line(p.x, p.y, q.x, q.y);
             ellipse(p.x, p.y, r, r);
+            
+           
         }
 
     }
