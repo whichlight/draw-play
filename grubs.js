@@ -10,6 +10,7 @@ let w, h;
 let pathStarted = false;
 let g_path;
 let paths = [];
+let gpoint= 0; 
 
 function setup() {
     w = windowWidth;
@@ -27,6 +28,8 @@ function mouseDragged(){
     }
     if (pathStarted) {
         g_path.addPoint(mouseX, mouseY);
+        gpoint++; 
+
     }
 }
 
@@ -39,8 +42,7 @@ function touchEnded(){
 }
 
 function draw() {
-    background(20, 100, 100);
-
+    background(0, 0, 0);
 
     paths.forEach((p) => {
         p.drawPath();
@@ -48,7 +50,7 @@ function draw() {
 
     paths.forEach((p) => {
         if(p.completed){
-            p.update();
+           p.update();
         }
     });
 }
@@ -79,6 +81,7 @@ class Path {
     }
 
     drawPath() {
+        
         this.points.forEach((p,i) => {
             if(i<this.points.length-1){
                 let p = this.points[i];
@@ -86,30 +89,22 @@ class Path {
 
                 let r = max(10,3*p5.Vector.dist(p.pos, q.pos)); 
                 noFill();
-                stroke(60, 100, 100);
-               // strokeWeight(r);
+                stroke(0, 0, 100);
                 line(p.x, p.y, q.x, q.y);
-             //  fill(p.c,100,100,0.5);
                ellipse(p.x, p.y, r, r);
             }
         });
+        
 
         if(this.index< this.points.length-1){
             let p = this.points[this.index];
             let q = this.points[this.index+1];
-
-
             let r = max(10,3*p5.Vector.dist(p.pos, q.pos)); 
-
-
             strokeWeight(1);
-            fill(60,100,100);
-           // noFill();
-           // line(p.x, p.y, q.x, q.y);
+            fill(0,0,100);
             ellipse(p.x, p.y, r, r);
-            
-           
         }
+        
 
     }
 
@@ -118,6 +113,7 @@ class Path {
         this.index %= this.points.length;
        
         // move things around 
+        
         if(this.points.length>2){
             let p = this.points[0].pos;
             let q = this.points[1].pos;
@@ -128,6 +124,7 @@ class Path {
             this.addPoint(j.x,j.y);
 
         }
+        
        
 
     }
