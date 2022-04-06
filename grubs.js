@@ -10,7 +10,6 @@ let w, h;
 let pathStarted = false;
 let g_path;
 let paths = [];
-let gpoint= 0; 
 
 function setup() {
     w = windowWidth;
@@ -28,7 +27,6 @@ function mouseDragged(){
     }
     if (pathStarted) {
         g_path.addPoint(mouseX, mouseY);
-        gpoint++; 
 
     }
 }
